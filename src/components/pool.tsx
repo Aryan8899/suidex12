@@ -91,7 +91,7 @@ const PoolsInterface: React.FC = () => {
     const fetchHistory = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/lpcoin/${account.address}`
+          `https://dexback-mu.vercel.app/api/lpcoin/${account.address}`
         );
         if (!response.ok) throw new Error("Failed to fetch history");
 

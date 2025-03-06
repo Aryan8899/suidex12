@@ -717,7 +717,7 @@ export default function MainCon() {
       console.log("Processed LP events:", lpEvents);
       try {
         const response = await fetch(
-          "http://localhost:5000/api/lpcoin",
+          "https://dexback-mu.vercel.app/api/lpcoin",
           {
             method: "POST",
             headers: {
