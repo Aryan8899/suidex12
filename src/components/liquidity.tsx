@@ -654,6 +654,7 @@ export default function MainCon() {
             totalSupply: parsed.totalSupply,
             pairId: currentPairId, // Add the current pair ID
             transactionHash: event.id.txDigest, // Add the transaction hash
+            packageId: parsed.Package_id || CONSTANTS.PACKAGE_ID
             // timestamp: event.timestampMs,
           };
           console.log("Processed event:", processedEvents);
@@ -691,6 +692,7 @@ export default function MainCon() {
         amount1: string;
         liquidity: string;
         total_supply: string;
+        packageId?: string;
       };
 
       const lpEvents = txData.events
@@ -706,6 +708,8 @@ export default function MainCon() {
           liquidity: (event.parsedJson as LPEventJson).liquidity,
           totalSupply: (event.parsedJson as LPEventJson).total_supply,
           pairId: currentPairId, // Add the current pair ID
+          packageId: (event.parsedJson as LPEventJson).packageId || CONSTANTS.PACKAGE_ID,
+          timestamp: new Date().toISOString(),
           transactionHash: txDigest, // Add the transaction hash
         }));
 
@@ -713,7 +717,7 @@ export default function MainCon() {
       console.log("Processed LP events:", lpEvents);
       try {
         const response = await fetch(
-          "https://dexback-mu.vercel.app/api/lpcoin",
+          "http://localhost:5000/api/lpcoin",
           {
             method: "POST",
             headers: {
